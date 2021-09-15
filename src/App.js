@@ -1,10 +1,15 @@
 import './App.css';
+import {BrowserRouter} from 'react-router-dom';
+import { Navbar } from './components/Navbar';
+import { AppRouter } from './components/AppRouter';
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-    </div>
+    <BrowserRouter>
+      <Navbar/>
+      <AppRouter/>
+    </BrowserRouter>
   );
 }
 
-export default App;
+
