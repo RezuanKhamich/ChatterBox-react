@@ -3,7 +3,7 @@ import {BrowserRouter} from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { AppRouter } from './components/AppRouter';
 
-export const App = () => {
+const App = () => {
   return (
     <BrowserRouter>
       <Navbar/>
@@ -11,5 +11,7 @@ export const App = () => {
     </BrowserRouter>
   );
 }
+
+export default App
 
 

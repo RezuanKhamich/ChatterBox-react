@@ -9,7 +9,7 @@ export const AppRouter = () => {
         (
             <Switch>
                 {privateRoutes.map(({path, Component}) =>
-                    <Route path={path} component={Component} exact={true}/>
+                    <Route key={path} path={path} component={Component} exact={true}/>
                 )}
                 <Redirect to={CHAT_ROUTE}/>
                 <p>asdsa</p>
@@ -19,7 +19,7 @@ export const AppRouter = () => {
         (
             <Switch>
                 {publicRoutes.map(({path, Component}) =>
-                    <Route path={path} component={Component} exact={true}/>
+                    <Route key={path} path={path} component={Component} exact={true}/>
                 )}
                 <Redirect to={LOGIN_ROUTE}/>
                 <p>asdsa</p>
