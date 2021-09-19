@@ -9,7 +9,6 @@ export const AppRouter = () => {
     const {auth} = useContext(Context)
     const [user] = useAuthState(auth)
 
-    console.log(user);
     return user ? 
         (
             <Switch>
@@ -17,7 +16,6 @@ export const AppRouter = () => {
                     <Route key={path} path={path} component={Component} exact={true}/>
                 )}
                 <Redirect to={CHAT_ROUTE}/>
-                <p>asdsa</p>
             </Switch>
         )
         :
@@ -27,7 +25,6 @@ export const AppRouter = () => {
                     <Route key={path} path={path} component={Component} exact={true}/>
                 )}
                 <Redirect to={LOGIN_ROUTE}/>
-                <p>asdsa</p>
             </Switch>
         )
 

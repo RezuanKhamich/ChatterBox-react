@@ -1,9 +1,12 @@
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from './App'
 import firebase from 'firebase';
 import 'firebase/firestore';
 import 'firebase/auth';
+
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/ie11'; 
 //import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
 
@@ -21,13 +24,10 @@ firebase.initializeApp({
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
-const auth = firebase.auth()
-const firestore = firebase.firestore()
-
 export const Context = createContext(null)
 
-
-
+const auth = firebase.auth()
+const firestore = firebase.firestore()
 
 ReactDOM.render(
   <Context.Provider value={{
