@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from "../index";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Avatar, Button, Container, Grid } from "@material-ui/core";
+import { Avatar, Button, Container, Grid, Box } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import firebase from "firebase";
 
@@ -11,6 +11,7 @@ const Chat = () => {
     const [value, setValue] = useState('')
 
     const [messages, setMessages] = useState([])
+    const [emptyMessage, setEmptyMessage] = useState(false)
 
     useEffect(() => {
         firestore.collection('messages').orderBy('createdAt').limit(50).onSnapshot(snapshot => {
@@ -20,15 +21,19 @@ const Chat = () => {
     }, [])
 
     const sendMessage = async () => {
-        firestore.collection('messages').add({
-            uid: user.uid,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-            text: value,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        })
-        setValue('')
-        console.log("sendMess")
+        if(value){
+            firestore.collection('messages').add({
+                uid: user.uid,
+                displayName: user.displayName,
+                photoURL: user.photoURL,
+                text: value,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            setValue('');
+            setEmptyMessage(false);
+        } else{
+            setEmptyMessage(true);
+        }
     }
 
     return (
@@ -37,8 +42,8 @@ const Chat = () => {
                 justifyContent={"center"}
                 style={{ height: window.innerHeight - 50, marginTop: 20 }}>
                 <div style={{ width: '80%', height: '60vh', border: '1px solid gray', overflowY: 'auto' }}>
-                    {messages.map(message=>{
-                        return(
+                    {messages.map(message => {
+                        return (
                             <div style={{
                                 margin: 10,
                                 border: user.uid === message.uid ? '2px solid green' : '2px dashed red',
@@ -47,7 +52,7 @@ const Chat = () => {
                                 padding: 5,
                             }}>
                                 <Grid container>
-                                    <Avatar src={message.photoURL}/>
+                                    <Avatar src={message.photoURL} />
                                     <div>{message.displayName}</div>
                                 </Grid>
                                 <div>{message.text}</div>
@@ -63,13 +68,19 @@ const Chat = () => {
                 >
                     <TextField
                         fullWidth
+                        error = {!emptyMessage ? '' : "error"}
                         rowsMax={2}
+                        id="outlined-error"
+                        label="Сообщение"
+                        defaultValue="Hello World"
+                        helperText={!emptyMessage ? ' ' : "Вы не ввели сообщение"}
                         variant={"outlined"}
                         value={value}
                         onChange={e => setValue(e.target.value)}
                     />
-                    <Button onClick={sendMessage} variant={"outlined"}>Отправить</Button>
+                    <Button onClick={sendMessage} color="secondary" variant={"contained"}>Отправить</Button>
                 </Grid>
+
             </Grid>
         </Container>
     )

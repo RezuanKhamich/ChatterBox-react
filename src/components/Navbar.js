@@ -12,9 +12,9 @@ export const Navbar = () => {
     return (
         <AppBar position="static" color={"secondary"}>
             <Toolbar variant={"dense"}>
-                <Grid container justifyContent={"flex-end"}>
+                <Grid container justifyContent={"flex-end"} >
                     {user ?
-                        <Button onClick={() => auth.signOut()} variant={"outlined"}>Выйти</Button>
+                        <Button onClick={() => auth.signOut()} style={{color: "white"}} variant={"outlined"}>Выйти</Button>
                     :
                     <NavLink to={LOGIN_ROUTE}>
                         <Button variant={"outlined"}>Логин</Button>
