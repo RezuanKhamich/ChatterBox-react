@@ -17,7 +17,7 @@ export const Navbar = () => {
                         <Button onClick={() => auth.signOut()} style={{color: "white"}} variant={"outlined"}>Выйти</Button>
                     :
                     <NavLink to={LOGIN_ROUTE}>
-                        <Button variant={"outlined"}>Логин</Button>
+                        <Button variant={"outlined"} style={{color: "white", textDecoration: 'none'}}>Логин</Button>
                     </NavLink>
                     }                   
                 </Grid>
